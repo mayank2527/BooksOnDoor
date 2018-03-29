@@ -1,0 +1,125 @@
+
+.f1{
+  color: black;
+}
+#div6
+{
+  background-color:rgb(100,189,95);
+}
+.font1
+{
+  font-family:Caesar Dressing;
+    
+}
+.font2
+{
+  font-size:30px;
+  font-family:Carter One;
+}
+p
+{
+  font-size:20px;
+  font-family:Chelsea Market;
+}
+
+@media screen and (min-width: 480px) {
+    #div1 {
+        padding: 50px 0px;
+        height: 500px; 
+    }
+    .font1{
+      font-size:7em;
+    }
+
+}
+@media screen and (max-width: 700px) {
+  
+    .font1{
+      font-size:4em;
+    }
+
+}
+
+#div1
+{
+
+//background-color:orange;
+color:white;
+font-family:Comic Sans Ms;
+}
+
+.nav div {
+    display:block;
+    float:left;
+    width:40%;
+    padding:0px;
+    margin:0px;
+  height:100%;
+    overflow:hidden
+}
+#div5
+{
+  
+  background-color:rgb(100,150,190);
+}
+#div3{
+background-color:rgb(180,100,100);
+color:white;
+font-family:Comic Sans Ms;
+}
+#div2{
+background-color:rgb(130,190,130);
+color:white;
+font-family:Comic Sans Ms;
+}
+#div4
+{
+  background-color:cyan;
+  color:white;
+}
+
+.img1{
+    background-image: url('http://3.bp.blogspot.com/-ddsfrRmdbgI/VaAt7sUl2BI/AAAAAAAAMlM/gVwGnCXXFmc/s1600/free-orange-retro-polka-dots-backgrounds-for-powerpoint.jpg');
+  
+    width:auto;
+    height:auto;
+}
+.img2{
+    background-image: url('https://wallpapercave.com/wp/lKeljXZ.jpg');
+  
+    width:auto;
+    height:auto;
+  
+}
+.img3{
+    background-image: url('http://www.kinyu-z.net/data/wallpapers/83/993592.jpg');
+  
+    width:auto;
+    height:auto;
+  
+}
+.img4{
+    background-image: url('https://avante.biz/wp-content/uploads/Gray-Backgrounds-Wallpapers/Gray-Backgrounds-Wallpapers-002.jpg');
+    margin-bottom: 15px;
+
+    min-height: 275px;
+  
+}
+.img5{
+    background-image: url('https://wallpapercave.com/wp/KQ1qA4s.jpg');
+  
+    width:auto;
+    height:auto;
+  
+}
+.img6{
+    background-image: url('https://wallpaperbrowse.com/media/images/TjUG3t2.jpg');
+  
+    width:auto;
+    height:auto;
+  
+}
+/*starting css for slideshow*/
+
+  
+/*css slideshow end*/
