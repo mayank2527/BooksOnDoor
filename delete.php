@@ -3,7 +3,7 @@ session_start();
 
 $con=mysqli_connect("localhost",'root','','booksondoor');
 
-$qr="delete from orders where bookid='".$_POST['id']."'"."and uname='".$_SESSION['uname']."'";
+$qr="delete from cart where bookid='".$_POST['id']."'"."and uname='".$_SESSION['uname']."'";
 
 $res=mysqli_query($con,$qr);
 

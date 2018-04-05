@@ -3,7 +3,7 @@ session_start();
 
 $con=mysqli_connect("localhost",'root','','booksondoor');
 
-$qr="select bookid,quantity from orders where uname='".$_SESSION['uname']."'";
+$qr="select bookid,quantity from cart where uname='".$_SESSION['uname']."'";
 
 $res=mysqli_query($con,$qr);
 
@@ -18,12 +18,15 @@ if(mysqli_num_rows($res)>0) {
 		$qun.=",";
 		
 		}
+echo $var.",".$qun;
+
 }
  else {
  	$var='failed';
+	echo $var;
+
 }
 
-echo $var.",".$qun;
 mysqli_close($con);
 
 ?>

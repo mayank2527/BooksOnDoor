@@ -2,15 +2,19 @@
 <html>
 <head>
 	<title>Cart</title>
-  	<!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled and minified CSS -->
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
  	<style type="text/css">
  		
  		.con{
  			min-height: 200px;
  			border: 1px solid black;
+ 			box-shadow: 0 0 4px 4px #aaa;
+ 			background-color: #ccffcc;
  		}
  		img{
  			position: relative;
@@ -18,9 +22,82 @@
  			left: 20px;
  			margin:10px;
  		}
+ 		body{
+ 			background-color: lightblue;
+ 		}
+ 		nav{
+ 			background-color: #a13a44;
+ 		}
+ 		a{
+ 			color: white;
+ 		}
+ 		a:hover{
+ 			color: black;
+ 		}
  	</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
 <body>
+	<nav class="navbar">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#"><p style='vertical-align:top;font-size:14px;color:white'> Books_On_Door</p></a>
+      
+      <?php 
+      session_start();
+      if(isset($_SESSION['res'])&&$_SESSION['res']=="success"){ ?>
+      <div class="dropdown" style="float: left;cursor: pointer;color: white;">
+      <a class="navbar-brand dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"><?php echo $_SESSION['uname'];?></span></a>
+      <ul class="dropdown-menu">
+      <li><a href="cart.php">Your Cart</a></li>
+      <li><a href="myorders.php">Your Orders</a></li>
+      <li><a href="request.php">Your Request</a></li>
+    </ul>
+  </div>
+
+      <?php 
+       }
+      
+      else{
+
+        ?>
+      <a class="navbar-brand" href="login.html"><span class="glyphicon glyphicon-user">NewUser</span></a>
+
+        <?php
+        
+      }
+       
+
+       ?>
+
+
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+     
+       
+        
+      <ul class="nav navbar-nav navbar-right">
+      	<li><a href="home.php">Home</a></li>
+     <?php if (isset($_SESSION['res'])&&$_SESSION['res']=="success") {
+
+       echo "<li><a href='logout.php'><span class='glyphicon glyphicon-log-in'>LogOUT</span></a></li>";
+
+     } 
+     else{
+       echo "<li><a href='' data-toggle='modal' data-target='#mod'><span class='glyphicon glyphicon-log-out'>LogIN</span></a></li>";
+     }
+     ?>
+       
+
+      </ul>
+    </div>
+  </div>
+</nav>
 	<div class="container">
 		<div class="row">
 			<center><h2>Your Cart</h2></center>
@@ -44,8 +121,15 @@
 			 	</span>
 			 	<button class="btn btn-danger">Remove</button>
  -->
-			</div>
 			
+			</div>
+						<div style="font-size: 1.4em;" class="col-md-6 col-md-offset-3">
+				<center>Total: ₹ <span id="total">Rs.</span> &nbsp &nbsp <a href="order.php"><button class="btn btn-primary">CheckOut</button></a>
+			</center>
+			</div>
+
+			<br><br>
+			<br><br>		
 		</div>
 	</div>
 
@@ -57,7 +141,7 @@
 		var qun=[];
 		$(function(){
 			<?php
-			session_start();
+		
 		if (isset($_SESSION['uname'])) {
 				
 			?>
@@ -112,7 +196,7 @@
 			bdata=bookdata[i];
 			console.log(bdata);
 	
-			  $('#second').append("<div id="+bookar[i]+"><center><h3>"+bdata.volumeInfo.title+"</h3></center><center>"+bdata.volumeInfo.authors+"</center><center>Price:"+bdata.saleInfo.listPrice.amount+"</center><img src="+bdata.volumeInfo.imageLinks.smallThumbnail+"alt='not available'><span class='sp' style='margin:0px 300px;'>Quantity &nbsp<button class='add btn btn-default'>+</button>&nbsp<button class='qan btn btn-primary'>"+qun[i]+"</button>&nbsp<button class='sub btn btn-danger'>-</button></span><button class='upd btn btn-default'>Update</button>&nbsp<button class='del btn btn-danger'>Remove</button><hr></div>");
+			  $('#second').append("<div id="+bookar[i]+"><center><h3>"+bdata.volumeInfo.title+"</h3></center><center>"+bdata.volumeInfo.authors+"</center><center class='price'>Price:"+bdata.saleInfo.listPrice.amount+"</center><img src="+bdata.volumeInfo.imageLinks.smallThumbnail+"alt='not available'><span class='sp' style='margin:0px 300px;'>Quantity &nbsp<button class='add btn btn-default'>+</button>&nbsp<button class='qan btn btn-primary'>"+qun[i]+"</button>&nbsp<button class='sub btn btn-danger'>-</button></span><button class='upd btn btn-default'>Update</button>&nbsp<button class='del btn btn-danger'>Remove</button><hr></div>");
 
 				
 		}
@@ -163,6 +247,7 @@
 				success:function(data){
 					if (data=="success") {
 						alert("Quantity Updated");
+						location.reload();
 					} else {
 						alert(data);
 					}
@@ -208,10 +293,17 @@
 				<?php
 			}
 		?>
+		var obj=$(".price");
+		var sum=0;
+		for (var i = 0; i < obj.length; i++) {
+			var ar=$(".price")[i].innerText.split(":");
+			sum+=Number(ar[1])*qun[i];
+		}
 
-	
+		$("span#total")[0].innerText=sum;
 		})
-	
+		
+
 	</script>
 </body>
 </html>

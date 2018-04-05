@@ -3,7 +3,7 @@ session_start();
 
 $con=mysqli_connect("localhost",'root','','booksondoor');
 
-$qr="update orders set quantity=".$_POST['qun']." where bookid='".$_POST['id']."'"."and uname='".$_SESSION['uname']."'";
+$qr="update cart set quantity=".$_POST['qun']." where bookid='".$_POST['id']."'"."and uname='".$_SESSION['uname']."'";
 
 $res=mysqli_query($con,$qr);
 

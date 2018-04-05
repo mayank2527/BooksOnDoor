@@ -1,7 +1,7 @@
 <?php
 $con=mysqli_connect("localhost",'root','','booksondoor');
 //echo "connection done";
-$qr="insert into user values('".$_POST['fname']."','".$_POST['lname']."','".$_POST['uname']."','".$_POST['email']."','".$_POST['pwd']."')";
+$qr="insert into user(fname,lname,uname,email,password) values('".$_POST['fname']."','".$_POST['lname']."','".$_POST['uname']."','".$_POST['email']."','".$_POST['pwd']."')";
 //echo $qr;
 
 $res=mysqli_query($con,$qr);

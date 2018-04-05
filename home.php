@@ -46,9 +46,14 @@
       
       <?php 
       if(isset($_SESSION['res'])&&$_SESSION['res']=="success"){ ?>
-
-      <a class="navbar-brand" href="cart.php"><span class="glyphicon glyphicon-user"><?php echo $_SESSION['uname'];?></span></a>
-
+      <div class="dropdown" style="float: left;cursor: pointer;">
+      <a class="navbar-brand dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"><?php echo $_SESSION['uname'];?></span></a>
+      <ul class="dropdown-menu">
+      <li><a href="cart.php">Your Cart</a></li>
+      <li><a href="myorders">Your Orders</a></li>
+      <li><a href="request.php">Your Request</a></li>
+    </ul>
+  </div>
       <?php 
        }
       
@@ -98,10 +103,23 @@
       <br><br><br>
         <div>
           <div style="margin-bottom: 10px;" class='col-md-3 col-md-offset-3'> 
-            <a style="text-decoration: none;" href="buybooks.php"><button class='btn-default btn btn-success btn-block btn-lg' id='btn1'>Buy books</button></a>
+<!--             <a style="text-decoration: none;" href="buybooks.php"><button class='btn-default btn btn-success btn-block btn-lg' id='btn1'>Buy books</button></a>
+
+ -->         <div class="dropdown">
+          <button class="btn btn-default btn btn-success btn-block btn-lg dropdown-toggle" type="button" id='btn1' data-toggle="dropdown">Buy books
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu" style="margin-left: 50px;">
+            <li><a href="buybooks.php">Buy New Books</a></li>
+            <li><a href="bookreq.php">Buy Old Books</a></li>
+          </ul>
+        </div> 
           </div>
 
-           <div class='col-md-3'><button id='btn2' class='btn btn-lg btn-default btn-success btn-block'>Sell your old books</button><br>
+           <div class='col-md-3'>
+            <a style="text-decoration: none;" href="sellbooks.php">
+            <button id='btn2' class='btn btn-lg btn-default btn-success btn-block'>Sell your old books</button>
+          </a>
+            <br>
            </div>
         
       </div><!--end of row div-->
@@ -165,11 +183,11 @@
     </p>
     <h3 class='text-center f1'><u>Buy New books</u></h3><br>
     <p class="text-center" style="padding:20px">Tell us which books you want and we will deliver them to you...right at your doorstep</p>
-   <center><button class='btn btn-success'>Start Buying Here</button></center>
+   <center><a href="buybooks.php"><button class='btn btn-success'>Start Buying Here</button></a></center>
     <br>
     <h3  class='text-center f1'><u>Sell your books</u></h3><br>
     <p class="text-center" style='padding:20px'>Wanna increase your pocket money???Just sell us your old books ..We will come to you to take them..you stay where you are</p>
-    <center><button class='btn btn-success'>Start Selling Here</button></center><br>
+    <center><a href="bookreq.php"><button class='btn btn-success'>Start Selling Here</button></a></center><br>
      </div>
   </div>
    
@@ -224,30 +242,30 @@
                 </div>
 
                 <div class="contact_form col-md-6 col-md-offset-3">
-                    <form action="">
+                    <form action="contact_me.php" method="post">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="text" placeholder="Name" class="form-control">
+                                <input type="text" name="name" placeholder="Name" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input type="email" placeholder="Email" class="form-control">
+                                <input type="email" name="email" placeholder="Email" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" placeholder="Subject" class="form-control">
+                                <input type="text" name="sub" placeholder="Subject" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <textarea placeholder="Message" cols="30" rows="7" class="form-control"></textarea>
+                                <textarea placeholder="Message" name="message" cols="30" rows="7" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-12 text-center">
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary">Send</button>
+                                <button type="submit" class="btn btn-primary">Send</button>
                             </div>
                         </div>
                         <form>

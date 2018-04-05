@@ -23,13 +23,13 @@ awesome/4.5.0/css/font-awesome.min.css"/>
     	.box
 {
  
-  margin:0px 20px;
+//  margin:0px 20px;
  // width:1200px;
-  border-width:15px;
+/*  border-width:15px;
   border-color:#FF4500;
   border-style:groove;
   border-radius:20px;
-}
+*/}
 .font1
 {
   color:black;
@@ -48,7 +48,7 @@ awesome/4.5.0/css/font-awesome.min.css"/>
 table
 {
     border:3px solid black;
-  table-layout:fixed;
+//  table-layout:fixed;
  // table-width:100px;
 }
 tr,td,th
@@ -73,7 +73,17 @@ table.fixed td,table.fixed tr ,table.fixed th
 { 
   overflow: hidden;
 }
-*/    </style>
+*/
+    nav{
+      background-color: #a13a44;
+    }
+    a{
+      color: white;
+    }
+    a:hover{
+      color: black;
+    }
+    </style>
 
          <script type="text/javascript">
       
@@ -89,7 +99,6 @@ table.fixed td,table.fixed tr ,table.fixed th
     </script>
 
 <script type="text/javascript">
-
 	function add(ID)
 {
 
@@ -171,7 +180,7 @@ var bookar=[];
 	      }
 	             try
 	               {
-	                 row.append("<td style='height:100px'>"+data.items[i].saleInfo.listPrice.amount+"</td>");
+	                 row.append("<td class='pr' style='height:100px'>"+data.items[i].saleInfo.listPrice.amount+"</td>");
 	               }
 	             catch(err2)
 	               {    
@@ -222,7 +231,7 @@ var bookar=[];
 	                 console.log('not found');
 	               }
 	           }///end of for
-            
+           $("#req").show(); 
 		<?php
 		if (isset($_SESSION['uname'])) {
 				
@@ -278,9 +287,11 @@ var bookar=[];
 	       				var q=$(this).parent().parent().find("div.quant");
 	       				var t=$(this).parent().parent().find("td.title");
 	       				var a=$(this).parent().parent().find("td.aut");
+                var p=$(this).parent().parent().find("td.pr");
 
 		       			console.log(ab[0].innerText);     
-		       			console.log(q[0].innerText);
+                console.log(q[0].innerText);
+                console.log(p[0].innerText);
 		       			
 		       			console.log(t[0].innerText);     
 		       			console.log(a[0].innerText);
@@ -296,7 +307,7 @@ var bookar=[];
 
 					    $.ajax({
    				    	url:"add.php",
-   				    	data:{bookid:ab[0].innerText,quantity:q[0].innerText},
+   				    	data:{bookid:ab[0].innerText,quantity:q[0].innerText,price:p[0].innerText,bname:t[0].innerText,author:a[0].innerText},
    				    	type:"POST",
    				    	dataType:'text',
    				    	success:function(data){
@@ -380,12 +391,9 @@ var bookar=[];
 </script>
 
   </head>
-<body class='bck1 box '>
-<div class="container-fluid">
-  <div class="row" >
-   
-    <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
+<body class='bck1 box'>
+<nav class="navbar">
+  <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
@@ -396,8 +404,14 @@ var bookar=[];
       
       <?php 
       if(isset($_SESSION['res'])&&$_SESSION['res']=="success"){ ?>
-
-      <a class="navbar-brand" href="cart.php"><span class="glyphicon glyphicon-user"><?php echo $_SESSION['uname'];?></span></a>
+      <div class="dropdown" style="float: left;cursor: pointer;">
+      <a class="navbar-brand dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"><?php echo $_SESSION['uname'];?></span></a>
+      <ul class="dropdown-menu">
+      <li><a href="cart.php">Your Cart</a></li>
+      <li><a href="myorders.php">Your Orders</a></li>
+      <li><a href="request.php">Your Request</a></li>
+    </ul>
+  </div>
 
       <?php 
        }
@@ -417,10 +431,9 @@ var bookar=[];
 
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-     
-       
-        
-      <ul class="nav navbar-nav navbar-right">
+     <ul class="nav navbar-nav navbar-right">
+        <li><a href="home.php">Home</a></li>
+
      <?php if (isset($_SESSION['res'])&&$_SESSION['res']=="success") {
 
        echo "<li><a href='logout.php'><span class='glyphicon glyphicon-log-in'>LogOUT</span></a></li>";
@@ -436,6 +449,10 @@ var bookar=[];
     </div>
   </div>
 </nav>
+<div class="container-fluid">
+  <div class="row" >
+   
+
 </div>
         <div class="col-md-6">
         <div class="modal fade in" id="mod">
@@ -497,5 +514,15 @@ var bookar=[];
   <br>
 	
 </div>
+<div id="req" class="panel panel-info col-md-8 col-md-offset-2">
+  <center>
+  <p style="color: black;font-size: 1.2em;">Unable To find the book of your choice</p>
+  <p style="color: black;font-size: 1.2em;"><a style="color: blue;" href="bookreq.php">Click Here</a> to Request</p>
+      </center>
+</div>
+<script type="text/javascript">
+   $("#req").hide();
+ 
+</script>
 </body>
 </html>
